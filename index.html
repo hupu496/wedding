@@ -850,143 +850,74 @@
                 }
             });
         });
-        class SmoothScroll {
+class PerformanceSmoothScroll {
     constructor() {
-        this.isScrolling = false;
-        this.scrollEndTimer = null;
+        this.running = false;
+        this.targetY = 0;
+        this.startY = 0;
+        this.duration = 0;
+        this.startTime = 0;
         this.init();
     }
 
     init() {
-        // Add CSS for smooth scrolling
-        this.addSmoothScrollCSS();
-        
-        // Add touch event listeners for mobile
-        this.addTouchEvents();
-        
-        // Handle anchor link clicks
-        this.handleAnchorLinks();
+        // Use passive listeners for better performance
+        this.addEventListeners();
     }
 
-    addSmoothScrollCSS() {
-        const style = document.createElement('style');
-        style.textContent = `
-            html {
-                scroll-behavior: smooth;
-            }
-            @media (prefers-reduced-motion: reduce) {
-                html {
-                    scroll-behavior: auto;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    addTouchEvents() {
-        let startY;
-        let startTime;
-
-        document.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            startTime = Date.now();
-        }, { passive: true });
-
-        document.addEventListener('touchmove', (e) => {
-            if (this.isScrolling) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        document.addEventListener('touchend', (e) => {
-            const endY = e.changedTouches[0].clientY;
-            const endTime = Date.now();
-            const distance = Math.abs(endY - startY);
-            const duration = endTime - startTime;
-
-            // Detect fast swipe
-            if (distance > 50 && duration < 300) {
-                this.handleMomentumScroll();
-            }
-        }, { passive: true });
-    }
-
-    handleMomentumScroll() {
-        // Add momentum-based smooth scrolling
-        const currentScroll = window.pageYOffset;
-        const viewportHeight = window.innerHeight;
-        
-        window.scrollTo({
-            top: currentScroll + (Math.random() > 0.5 ? viewportHeight : -viewportHeight),
-            behavior: 'smooth'
+    addEventListeners() {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => this.handleClick(e), { passive: false });
         });
     }
 
-    handleAnchorLinks() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = anchor.getAttribute('href');
-                this.scrollToTarget(target);
-            });
-        });
+    handleClick(e) {
+        e.preventDefault();
+        const target = e.currentTarget.getAttribute('href');
+        this.scrollTo(target);
     }
 
-    scrollToTarget(target, duration = 800) {
+    scrollTo(target, duration = 800) {
+        if (this.running) return;
+
         const targetElement = document.querySelector(target);
         if (!targetElement) return;
 
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
+        this.targetY = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        this.startY = window.pageYOffset;
+        this.duration = duration;
+        this.startTime = null;
+        this.running = true;
 
-        // For mobile, use smaller duration for shorter distances
-        const adjustedDuration = Math.min(duration, Math.abs(distance) * 0.5);
-
-        this.isScrolling = true;
-
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-
-        // Clear previous timer
-        if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
-
-        // Set scrolling state to false after scroll completes
-        this.scrollEndTimer = setTimeout(() => {
-            this.isScrolling = false;
-        }, adjustedDuration + 100);
+        requestAnimationFrame((time) => this.animate(time));
     }
 
-    // Programmatic scroll to element
-    scrollToElement(element, offset = 0) {
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-            top: elementPosition - offset,
-            behavior: 'smooth'
-        });
+    animate(currentTime) {
+        if (this.startTime === null) this.startTime = currentTime;
+        
+        const timeElapsed = currentTime - this.startTime;
+        const progress = Math.min(timeElapsed / this.duration, 1);
+        
+        // Easing function for smooth animation
+        const ease = this.easeOutCubic(progress);
+        const newY = this.startY + (this.targetY - this.startY) * ease;
+        
+        window.scrollTo(0, newY);
+        
+        if (progress < 1) {
+            requestAnimationFrame((time) => this.animate(time));
+        } else {
+            this.running = false;
+        }
     }
 
-    // Scroll to top
-    scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Scroll to bottom
-    scrollToBottom() {
-        window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth'
-        });
+    easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
     }
 }
 
-// Initialize smooth scroll
-const smoothScroll = new SmoothScroll();
+// Initialize
+const performanceScroll = new PerformanceSmoothScroll();
     </script>
 </body>
 </html>
