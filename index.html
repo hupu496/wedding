@@ -491,8 +491,11 @@
                 height: 12px;
             }
         }
+        /* music */
+       
     </style>
 </head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <body>
     <!-- Header Section -->
     <header>
@@ -515,7 +518,57 @@
             <p>Together with our families, we invite you to celebrate our wedding</p>
         </div>
     </header>
+     <audio id="weddingMusic" loop preload="auto" autoplay>
+        <!-- Replace with your actual music file -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Background Music Auto-Play with Loop
+        const bgMusic = document.getElementById('weddingMusic');
+        
+        // Set volume to 30% and ensure loop
+        bgMusic.volume = 0.3;
+        bgMusic.loop = true;
+        
+        // Force play on load
+        window.addEventListener('load', function() {
+            console.log('Page loaded, starting music...');
+            
+            // Multiple attempts to play
+            const playMusic = () => {
+                bgMusic.play().then(() => {
+                    console.log('Music started successfully');
+                }).catch(error => {
+                    console.log('Play attempt failed:', error);
+                    // Retry after 1 second
+                    setTimeout(playMusic, 1000);
+                });
+            };
+            
+            // Start playing
+            playMusic();
+        });
+
+        // Also try to play when user interacts (for strict browsers)
+        document.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => console.log('Interactive play failed:', e));
+            }
+        });
+
+        // Ensure music continues if paused by browser
+        bgMusic.addEventListener('pause', function() {
+            if (!bgMusic.ended) {
+                setTimeout(() => {
+                    bgMusic.play().catch(e => console.log('Resume failed:', e));
+                }, 100);
+            }
+        });
+    </script>
    <div class="petal-container" id="petalContainer"></div>
+   <!-- <iframe src="https://assets.pinterest.com/ext/embed.html?id=158963061843254550" height="714" width="345" frameborder="0" scrolling="no" ></iframe> -->
     <!-- Introduction Section -->
     <section class="introduction">
         <div class="container">
@@ -670,13 +723,36 @@
             </div>
         </div>
     </section>
+<audio id="weddingMusic" loop preload="auto">
+    <source src="your-wedding-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
+<script>
+    const bgMusic = document.getElementById('weddingMusic');
+    bgMusic.volume = 0.3;
+    bgMusic.loop = true;
+    
+    let musicStarted = false;
+    
+    function startMusic() {
+        if (!musicStarted) {
+            bgMusic.play();
+            musicStarted = true;
+        }
+    }
+    
+    // Start on any user interaction
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
+    document.addEventListener('keydown', startMusic);
+</script>
     <!-- Footer -->
     <footer>
         <div class="container">
             <p class="footer-text">We look forward to celebrating with you!</p>
-            <p>With love,<br>Rohan & Priya</p>
-            <a href="#" class="rsvp-btn">RSVP Now</a>
+            <p>With love,<br>Aadarsh & Sonarkshi</p>
+            <a href="#" class="rsvp-btn">AdSi Now</a>
         </div>
     </footer>
 
@@ -919,5 +995,7 @@ class PerformanceSmoothScroll {
 // Initialize
 const performanceScroll = new PerformanceSmoothScroll();
     </script>
+  
+
 </body>
 </html>
