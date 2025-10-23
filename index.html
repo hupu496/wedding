@@ -723,30 +723,7 @@
             </div>
         </div>
     </section>
-<audio id="weddingMusic" loop preload="auto">
-    <source src="your-wedding-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 
-<script>
-    const bgMusic = document.getElementById('weddingMusic');
-    bgMusic.volume = 0.3;
-    bgMusic.loop = true;
-    
-    let musicStarted = false;
-    
-    function startMusic() {
-        if (!musicStarted) {
-            bgMusic.play();
-            musicStarted = true;
-        }
-    }
-    
-    // Start on any user interaction
-    document.addEventListener('click', startMusic);
-    document.addEventListener('touchstart', startMusic);
-    document.addEventListener('keydown', startMusic);
-</script>
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -756,71 +733,9 @@
         </div>
     </footer>
 
-    <script>
+    
         // Countdown Timer
-        function updateCountdown() {
-            const weddingDate = new Date('December 15, 2023 18:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
-            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
-
-            if (distance < 0) {
-                clearInterval(countdownTimer);
-                document.querySelector('.countdown-container').innerHTML = "<h3>We're married! Thank you for celebrating with us!</h3>";
-            }
-        }
-
-        const countdownTimer = setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Scroll Animations
-        function checkVisibility() {
-            const eventCards = document.querySelectorAll('.event-card');
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            
-            eventCards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (cardTop < windowHeight * 0.85) {
-                    card.classList.add('visible');
-                }
-            });
-            
-            galleryItems.forEach(item => {
-                const itemTop = item.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (itemTop < windowHeight * 0.85) {
-                    item.classList.add('visible');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', checkVisibility);
-        window.addEventListener('load', checkVisibility);
-
-        // Event Card Hover Effects
-        const eventCards = document.querySelectorAll('.event-card');
-        eventCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-    </script>
+       
       <script>
         function createPetal(type) {
             const petalContainer = document.getElementById('petalContainer');
