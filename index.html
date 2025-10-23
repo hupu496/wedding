@@ -841,74 +841,8 @@
                 }
             });
         });
-class PerformanceSmoothScroll {
-    constructor() {
-        this.running = false;
-        this.targetY = 0;
-        this.startY = 0;
-        this.duration = 0;
-        this.startTime = 0;
-        this.init();
-    }
 
-    init() {
-        // Use passive listeners for better performance
-        this.addEventListeners();
-    }
 
-    addEventListeners() {
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => this.handleClick(e), { passive: false });
-        });
-    }
-
-    handleClick(e) {
-        e.preventDefault();
-        const target = e.currentTarget.getAttribute('href');
-        this.scrollTo(target);
-    }
-
-    scrollTo(target, duration = 800) {
-        if (this.running) return;
-
-        const targetElement = document.querySelector(target);
-        if (!targetElement) return;
-
-        this.targetY = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        this.startY = window.pageYOffset;
-        this.duration = duration;
-        this.startTime = null;
-        this.running = true;
-
-        requestAnimationFrame((time) => this.animate(time));
-    }
-
-    animate(currentTime) {
-        if (this.startTime === null) this.startTime = currentTime;
-        
-        const timeElapsed = currentTime - this.startTime;
-        const progress = Math.min(timeElapsed / this.duration, 1);
-        
-        // Easing function for smooth animation
-        const ease = this.easeOutCubic(progress);
-        const newY = this.startY + (this.targetY - this.startY) * ease;
-        
-        window.scrollTo(0, newY);
-        
-        if (progress < 1) {
-            requestAnimationFrame((time) => this.animate(time));
-        } else {
-            this.running = false;
-        }
-    }
-
-    easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
-    }
-}
-
-// Initialize
-const performanceScroll = new PerformanceSmoothScroll();
     </script>
   
 
