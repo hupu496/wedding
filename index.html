@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohan & Priya's Wedding Celebration</title>
+    <title>Aadarsh & Sonakshi's Wedding Celebration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -33,7 +36,7 @@
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
-            color: var(--maroon);
+            color: #D4AF37;
         }
 
         .container {
@@ -62,6 +65,19 @@
             margin-bottom: 10px;
             animation: fadeInDown 1s ease;
         }
+          .couple-names {
+      font-family: "Playwrite DE SAS", cursive;
+      font-size: 80px;
+      color: #d63384;
+      text-shadow: 2px 2px 8px rgba(214, 51, 132, 0.3);
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .couple-names:hover {
+      transform: scale(1.05);
+      text-shadow: 3px 3px 15px rgba(214, 51, 132, 0.6);
+    }
 
         .wedding-date {
             font-size: 1.2rem;
@@ -70,12 +86,11 @@
         }
 
         .and-symbol {
-            font-size: 3rem;
-            color: var(--gold);
-            margin: 0 10px;
-            animation: pulse 2s infinite;
-        }
-
+      color: #ff85a2;
+      font-size: 90px;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
         .floral-decoration {
             position: absolute;
             width: 150px;
@@ -141,18 +156,28 @@
             max-width: 600px;
             margin: 0 auto 30px;
         }
+.bride-groom-img {
+  width: 67%;
+  height: 208px;
+  border-radius: 10%;
+  object-fit: cover;
+  border: 5px solid var(--gold);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  animation: moveUp 1s ease-out;
+}
 
-        .bride-groom-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--gold);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            animation: zoomIn 1s ease;
-        }
-
+/* ✨ Keyframes for Down-to-Up motion */
+@keyframes moveUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
         /* Events Section */
         .events {
             padding: 60px 20px;
@@ -510,11 +535,60 @@
         </div>
         
         <div class="header-content container">
-            <h1 class="couple-names">Rohan <span class="and-symbol">&</span> Priya</h1>
-            <p class="wedding-date">15th December 2023</p>
+          <h1 class="couple-names">Aadarsh <span class="and-symbol">&</span> Sonakshi</h1>
+            <p class="wedding-date">6 Feburary 2025</p>
             <p>Together with our families, we invite you to celebrate our wedding</p>
         </div>
     </header>
+      <audio id="weddingMusic" loop preload="auto" autoplay>
+        <!-- Replace with your actual music file -->
+        <source src="songs.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Background Music Auto-Play with Loop
+        const bgMusic = document.getElementById('weddingMusic');
+        
+        // Set volume to 30% and ensure loop
+        bgMusic.volume = 0.3;
+        bgMusic.loop = true;
+        
+        // Force play on load
+        window.addEventListener('load', function() {
+            console.log('Page loaded, starting music...');
+            
+            // Multiple attempts to play
+            const playMusic = () => {
+                bgMusic.play().then(() => {
+                    console.log('Music started successfully');
+                }).catch(error => {
+                    console.log('Play attempt failed:', error);
+                    // Retry after 1 second
+                    setTimeout(playMusic, 1000);
+                });
+            };
+            
+            // Start playing
+            playMusic();
+        });
+
+        // Also try to play when user interacts (for strict browsers)
+        document.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => console.log('Interactive play failed:', e));
+            }
+        });
+
+        // Ensure music continues if paused by browser
+        bgMusic.addEventListener('pause', function() {
+            if (!bgMusic.ended) {
+                setTimeout(() => {
+                    bgMusic.play().catch(e => console.log('Resume failed:', e));
+                }, 100);
+            }
+        });
+    </script>
    <div class="petal-container" id="petalContainer"></div>
     <!-- Introduction Section -->
     <section class="introduction">
@@ -523,7 +597,7 @@
             <p class="invitation-text">
                 With immense joy and gratitude, we invite you to witness and bless our union as we embark on this beautiful journey of togetherness. Your presence will make our celebrations complete.
             </p>
-            <img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d2VkZGluZyUyMGNvdXBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Bride and Groom" class="bride-groom-img">
+            <img src="image/home.png" alt="Bride and Groom" class="bride-groom-img">
         </div>
     </section>
 
@@ -675,15 +749,14 @@
     <footer>
         <div class="container">
             <p class="footer-text">We look forward to celebrating with you!</p>
-            <p>With love,<br>Rohan & Priya</p>
-            <a href="#" class="rsvp-btn">RSVP Now</a>
+            <p>With love,<br>Aadarsh & Sonakshi</p>
         </div>
     </footer>
 
     <script>
         // Countdown Timer
         function updateCountdown() {
-            const weddingDate = new Date('December 15, 2023 18:00:00').getTime();
+            const weddingDate = new Date('Feburary 06, 2026 18:00:00').getTime();
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
