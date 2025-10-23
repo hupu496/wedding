@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aadarsh & Sonakshi's Wedding Celebration</title>
+    <title>Rohan & Priya's Wedding Celebration</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -33,7 +33,7 @@
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
-            color: rgb(240, 192, 33);
+            color: var(--maroon);
         }
 
         .container {
@@ -143,8 +143,8 @@
         }
 
         .bride-groom-img {
-            width: 169px;
-            height: 217px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--gold);
@@ -491,11 +491,8 @@
                 height: 12px;
             }
         }
-        /* music */
-       
     </style>
 </head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <body>
     <!-- Header Section -->
     <header>
@@ -513,62 +510,12 @@
         </div>
         
         <div class="header-content container">
-            <h1 class="couple-names">Aadarsh <span class="and-symbol">&</span> Sonakshi</h1>
-            <p class="wedding-date">6 Feburary 2026</p>
+            <h1 class="couple-names">Rohan <span class="and-symbol">&</span> Priya</h1>
+            <p class="wedding-date">15th December 2023</p>
             <p>Together with our families, we invite you to celebrate our wedding</p>
         </div>
     </header>
-     <audio id="weddingMusic" loop preload="auto" autoplay>
-        <!-- Replace with your actual music file -->
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <script>
-        // Background Music Auto-Play with Loop
-        const bgMusic = document.getElementById('weddingMusic');
-        
-        // Set volume to 30% and ensure loop
-        bgMusic.volume = 0.3;
-        bgMusic.loop = true;
-        
-        // Force play on load
-        window.addEventListener('load', function() {
-            console.log('Page loaded, starting music...');
-            
-            // Multiple attempts to play
-            const playMusic = () => {
-                bgMusic.play().then(() => {
-                    console.log('Music started successfully');
-                }).catch(error => {
-                    console.log('Play attempt failed:', error);
-                    // Retry after 1 second
-                    setTimeout(playMusic, 1000);
-                });
-            };
-            
-            // Start playing
-            playMusic();
-        });
-
-        // Also try to play when user interacts (for strict browsers)
-        document.addEventListener('click', function() {
-            if (bgMusic.paused) {
-                bgMusic.play().catch(e => console.log('Interactive play failed:', e));
-            }
-        });
-
-        // Ensure music continues if paused by browser
-        bgMusic.addEventListener('pause', function() {
-            if (!bgMusic.ended) {
-                setTimeout(() => {
-                    bgMusic.play().catch(e => console.log('Resume failed:', e));
-                }, 100);
-            }
-        });
-    </script>
    <div class="petal-container" id="petalContainer"></div>
-   <!-- <iframe src="https://assets.pinterest.com/ext/embed.html?id=158963061843254550" height="714" width="345" frameborder="0" scrolling="no" ></iframe> -->
     <!-- Introduction Section -->
     <section class="introduction">
         <div class="container">
@@ -576,7 +523,7 @@
             <p class="invitation-text">
                 With immense joy and gratitude, we invite you to witness and bless our union as we embark on this beautiful journey of togetherness. Your presence will make our celebrations complete.
             </p>
-            <img src="image/home.png" alt="Bride and Groom" class="bride-groom-img">
+            <img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d2VkZGluZyUyMGNvdXBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Bride and Groom" class="bride-groom-img">
         </div>
     </section>
 
@@ -594,8 +541,8 @@
                         <h3 class="event-name">Tilak Ceremony</h3>
                     </div>
                     <div class="event-body">
-                        <p class="event-date"><i class="far fa-calendar"></i> 2 Feburary 2026</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 7:00 PM onwards</p>
+                        <p class="event-date"><i class="far fa-calendar"></i> 10th December 2023</p>
+                        <p class="event-time"><i class="far fa-clock"></i> 11:00 AM onwards</p>
                         <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Groom's Residence</p>
                     </div>
                 </div>
@@ -728,14 +675,76 @@
     <footer>
         <div class="container">
             <p class="footer-text">We look forward to celebrating with you!</p>
-            <p>With love,<br>Aadarsh & Sonarkshi</p>
-            <a href="#" class="rsvp-btn">AdSi Now</a>
+            <p>With love,<br>Rohan & Priya</p>
+            <a href="#" class="rsvp-btn">RSVP Now</a>
         </div>
     </footer>
 
-    
+    <script>
         // Countdown Timer
-       
+        function updateCountdown() {
+            const weddingDate = new Date('December 15, 2023 18:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.querySelector('.countdown-container').innerHTML = "<h3>We're married! Thank you for celebrating with us!</h3>";
+            }
+        }
+
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Scroll Animations
+        function checkVisibility() {
+            const eventCards = document.querySelectorAll('.event-card');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            eventCards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.85) {
+                    card.classList.add('visible');
+                }
+            });
+            
+            galleryItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight * 0.85) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+
+        // Event Card Hover Effects
+        const eventCards = document.querySelectorAll('.event-card');
+        eventCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
       <script>
         function createPetal(type) {
             const petalContainer = document.getElementById('petalContainer');
@@ -841,10 +850,143 @@
                 }
             });
         });
+        class SmoothScroll {
+    constructor() {
+        this.isScrolling = false;
+        this.scrollEndTimer = null;
+        this.init();
+    }
 
+    init() {
+        // Add CSS for smooth scrolling
+        this.addSmoothScrollCSS();
+        
+        // Add touch event listeners for mobile
+        this.addTouchEvents();
+        
+        // Handle anchor link clicks
+        this.handleAnchorLinks();
+    }
 
+    addSmoothScrollCSS() {
+        const style = document.createElement('style');
+        style.textContent = `
+            html {
+                scroll-behavior: smooth;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    addTouchEvents() {
+        let startY;
+        let startTime;
+
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            startTime = Date.now();
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (this.isScrolling) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            const endY = e.changedTouches[0].clientY;
+            const endTime = Date.now();
+            const distance = Math.abs(endY - startY);
+            const duration = endTime - startTime;
+
+            // Detect fast swipe
+            if (distance > 50 && duration < 300) {
+                this.handleMomentumScroll();
+            }
+        }, { passive: true });
+    }
+
+    handleMomentumScroll() {
+        // Add momentum-based smooth scrolling
+        const currentScroll = window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        
+        window.scrollTo({
+            top: currentScroll + (Math.random() > 0.5 ? viewportHeight : -viewportHeight),
+            behavior: 'smooth'
+        });
+    }
+
+    handleAnchorLinks() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = anchor.getAttribute('href');
+                this.scrollToTarget(target);
+            });
+        });
+    }
+
+    scrollToTarget(target, duration = 800) {
+        const targetElement = document.querySelector(target);
+        if (!targetElement) return;
+
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+
+        // For mobile, use smaller duration for shorter distances
+        const adjustedDuration = Math.min(duration, Math.abs(distance) * 0.5);
+
+        this.isScrolling = true;
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+
+        // Clear previous timer
+        if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+
+        // Set scrolling state to false after scroll completes
+        this.scrollEndTimer = setTimeout(() => {
+            this.isScrolling = false;
+        }, adjustedDuration + 100);
+    }
+
+    // Programmatic scroll to element
+    scrollToElement(element, offset = 0) {
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: elementPosition - offset,
+            behavior: 'smooth'
+        });
+    }
+
+    // Scroll to top
+    scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Scroll to bottom
+    scrollToBottom() {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Initialize smooth scroll
+const smoothScroll = new SmoothScroll();
     </script>
-  
-
 </body>
 </html>
