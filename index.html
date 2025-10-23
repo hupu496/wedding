@@ -12,6 +12,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+  scroll-behavior: smooth;
+}
 
         :root {
             --gold: #D4AF37;
@@ -847,6 +850,143 @@
                 }
             });
         });
+        class SmoothScroll {
+    constructor() {
+        this.isScrolling = false;
+        this.scrollEndTimer = null;
+        this.init();
+    }
+
+    init() {
+        // Add CSS for smooth scrolling
+        this.addSmoothScrollCSS();
+        
+        // Add touch event listeners for mobile
+        this.addTouchEvents();
+        
+        // Handle anchor link clicks
+        this.handleAnchorLinks();
+    }
+
+    addSmoothScrollCSS() {
+        const style = document.createElement('style');
+        style.textContent = `
+            html {
+                scroll-behavior: smooth;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    addTouchEvents() {
+        let startY;
+        let startTime;
+
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            startTime = Date.now();
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (this.isScrolling) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            const endY = e.changedTouches[0].clientY;
+            const endTime = Date.now();
+            const distance = Math.abs(endY - startY);
+            const duration = endTime - startTime;
+
+            // Detect fast swipe
+            if (distance > 50 && duration < 300) {
+                this.handleMomentumScroll();
+            }
+        }, { passive: true });
+    }
+
+    handleMomentumScroll() {
+        // Add momentum-based smooth scrolling
+        const currentScroll = window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        
+        window.scrollTo({
+            top: currentScroll + (Math.random() > 0.5 ? viewportHeight : -viewportHeight),
+            behavior: 'smooth'
+        });
+    }
+
+    handleAnchorLinks() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = anchor.getAttribute('href');
+                this.scrollToTarget(target);
+            });
+        });
+    }
+
+    scrollToTarget(target, duration = 800) {
+        const targetElement = document.querySelector(target);
+        if (!targetElement) return;
+
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+
+        // For mobile, use smaller duration for shorter distances
+        const adjustedDuration = Math.min(duration, Math.abs(distance) * 0.5);
+
+        this.isScrolling = true;
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+
+        // Clear previous timer
+        if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
+
+        // Set scrolling state to false after scroll completes
+        this.scrollEndTimer = setTimeout(() => {
+            this.isScrolling = false;
+        }, adjustedDuration + 100);
+    }
+
+    // Programmatic scroll to element
+    scrollToElement(element, offset = 0) {
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: elementPosition - offset,
+            behavior: 'smooth'
+        });
+    }
+
+    // Scroll to top
+    scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Scroll to bottom
+    scrollToBottom() {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Initialize smooth scroll
+const smoothScroll = new SmoothScroll();
     </script>
 </body>
 </html>
