@@ -68,15 +68,15 @@
           .couple-names {
       font-family: "Playwrite DE SAS", cursive;
       font-size: 80px;
-      color: #d63384;
-      text-shadow: 2px 2px 8px rgba(214, 51, 132, 0.3);
+      color: #FFD700;
+      text-shadow: 2px 2px 8px #f3e507;
       letter-spacing: 2px;
       transition: all 0.3s ease;
     }
 
     .couple-names:hover {
       transform: scale(1.05);
-      text-shadow: 3px 3px 15px rgba(214, 51, 132, 0.6);
+      text-shadow: 3px 3px 15px #f3e507;
     }
 
         .wedding-date {
@@ -86,7 +86,7 @@
         }
 
         .and-symbol {
-      color: #ff85a2;
+      color: #D4AF37;
       font-size: 90px;
       vertical-align: middle;
       margin: 0 10px;
@@ -217,13 +217,39 @@
             margin-bottom: 15px;
         }
 
-        .event-header {
-            background: linear-gradient(135deg, var(--maroon), var(--dark-red));
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+.event-header {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
 
+/* Background video */
+.event-header .bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.7);
+}
+
+/* Gradient overlay */
+.event-header .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgb(99 41 55 / 70%), rgb(146 55 55 / 70%));
+    z-index: 1;
+}
+
+/* Content above video */
+.event-header * {
+    position: relative;
+    z-index: 2;
+}
         .event-name {
             font-size: 1.5rem;
             margin-bottom: 5px;
@@ -595,14 +621,19 @@
                 <!-- Tilak Ceremony -->
                 <div class="event-card" id="tilak">
                     <div class="event-header">
-                        <div class="event-icon">
-                            <i class="fas fa-hands"></i>
-                        </div>
-                        <h3 class="event-name">Tilak Ceremony</h3>
-                    </div>
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="image/tilak.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="event-icon">
+        <i class="fas fa-hands"></i>
+    </div>
+    <h3 class="event-name">Tilak Ceremony</h3>
+</div>
                     <div class="event-body">
                         <p class="event-date"><i class="far fa-calendar"></i> 2 Feburary 2026</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 6:00 PM onwards</p>
                         <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Groom's Residence</p>
                     </div>
                 </div>
@@ -610,75 +641,55 @@
                 <!-- Haldi Ceremony -->
                 <div class="event-card" id="haldi">
                     <div class="event-header">
+                         <video class="bg-video" autoplay muted loop playsinline>
+        <source src="image/haldi.mp4" type="video/mp4">
+    </video>
                         <div class="event-icon">
                             <i class="fas fa-spa"></i>
                         </div>
                         <h3 class="event-name">Haldi Ceremony</h3>
                     </div>
                     <div class="event-body">
-                        <p class="event-date"><i class="far fa-calendar"></i> 12th December 2023</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 9:00 AM onwards</p>
+                        <p class="event-date"><i class="far fa-calendar"></i> 05 Feburary 2026</p>
+                       
                         <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Both Residences</p>
                     </div>
                 </div>
 
                 <!-- Mehendi Ceremony -->
-                <div class="event-card" id="mehendi">
-                    <div class="event-header">
-                        <div class="event-icon">
-                            <i class="fas fa-draw-polygon"></i>
-                        </div>
-                        <h3 class="event-name">Mehendi Ceremony</h3>
-                    </div>
-                    <div class="event-body">
-                        <p class="event-date"><i class="far fa-calendar"></i> 13th December 2023</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 4:00 PM onwards</p>
-                        <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Bride's Residence</p>
-                    </div>
-                </div>
-
-                <!-- Sangeet Ceremony -->
-                <div class="event-card" id="sangeet">
-                    <div class="event-header">
-                        <div class="event-icon">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3 class="event-name">Sangeet Night</h3>
-                    </div>
-                    <div class="event-body">
-                        <p class="event-date"><i class="far fa-calendar"></i> 14th December 2023</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 7:00 PM onwards</p>
-                        <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Grand Palace Lawn</p>
-                    </div>
-                </div>
-
                 <!-- Wedding Ceremony -->
                 <div class="event-card" id="wedding">
                     <div class="event-header">
+                         <video class="bg-video" autoplay muted loop playsinline>
+        <source src="image/shaadi.mp4" type="video/mp4">
+    </video>
                         <div class="event-icon">
                             <i class="fas fa-ring"></i>
                         </div>
                         <h3 class="event-name">Wedding Ceremony</h3>
                     </div>
                     <div class="event-body">
-                        <p class="event-date"><i class="far fa-calendar"></i> 15th December 2023</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 6:00 PM onwards</p>
-                        <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Shiv Temple</p>
+                        <p class="event-date"><i class="far fa-calendar"></i>06 Feburary 2026</p>
+                        <p class="event-time"><i class="far fa-clock"></i> 7:00 PM onwards</p>
+                        <p class="event-venue"><i class="fas fa-map-marker-alt"></i>Hotel Maurya Garden & Banquet </p>
                     </div>
                 </div>
 
                 <!-- Reception -->
                 <div class="event-card" id="reception">
                     <div class="event-header">
+                          <video class="bg-video" autoplay muted loop playsinline>
+        <source src="image/receiption.mp4" type="video/mp4">
+    </video>
                         <div class="event-icon">
                             <i class="fas fa-glass-cheers"></i>
                         </div>
                         <h3 class="event-name">Reception</h3>
                     </div>
                     <div class="event-body">
-                        <p class="event-date"><i class="far fa-calendar"></i> 16th December 2023</p>
-                        <p class="event-time"><i class="far fa-clock"></i> 7:30 PM onwards</p>
-                        <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Royal Grand Hotel</p>
+                        <p class="event-date"><i class="far fa-calendar"></i> 08 Feburary 2026</p>
+                        <p class="event-time"><i class="far fa-clock"></i> 6:30 PM onwards</p>
+                        <p class="event-venue"><i class="fas fa-map-marker-alt"></i> Home(Samastipur)</p>
                     </div>
                 </div>
             </div>
