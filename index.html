@@ -157,7 +157,7 @@
             margin: 0 auto 30px;
         }
 .bride-groom-img {
-  width: 67%;
+  width: 50%;
   height: 208px;
   border-radius: 10%;
   object-fit: cover;
@@ -536,59 +536,45 @@
         
         <div class="header-content container">
           <h1 class="couple-names">Aadarsh <span class="and-symbol">&</span> Sonakshi</h1>
+          <img src="image/front.png" alt="">
             <p class="wedding-date">6 Feburary 2025</p>
             <p>Together with our families, we invite you to celebrate our wedding</p>
         </div>
     </header>
-      <audio id="weddingMusic" loop preload="auto" autoplay>
-        <!-- Replace with your actual music file -->
-        <source src="songs.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <audio id="weddingMusic" loop preload="auto">
+    <source src="songs.mp4" type="audio/mpeg">
+</audio>
 
-    <script>
-        // Background Music Auto-Play with Loop
-        const bgMusic = document.getElementById('weddingMusic');
-        
-        // Set volume to 30% and ensure loop
-        bgMusic.volume = 0.3;
-        bgMusic.loop = true;
-        
-        // Force play on load
-        window.addEventListener('load', function() {
-            console.log('Page loaded, starting music...');
-            
-            // Multiple attempts to play
-            const playMusic = () => {
-                bgMusic.play().then(() => {
-                    console.log('Music started successfully');
-                }).catch(error => {
-                    console.log('Play attempt failed:', error);
-                    // Retry after 1 second
-                    setTimeout(playMusic, 1000);
-                });
-            };
-            
-            // Start playing
-            playMusic();
-        });
+<script>
+    const bgMusic = document.getElementById("weddingMusic");
+    bgMusic.volume = 0.3;
 
-        // Also try to play when user interacts (for strict browsers)
-        document.addEventListener('click', function() {
-            if (bgMusic.paused) {
-                bgMusic.play().catch(e => console.log('Interactive play failed:', e));
-            }
-        });
+    let musicStarted = false;
 
-        // Ensure music continues if paused by browser
-        bgMusic.addEventListener('pause', function() {
-            if (!bgMusic.ended) {
-                setTimeout(() => {
-                    bgMusic.play().catch(e => console.log('Resume failed:', e));
-                }, 100);
-            }
-        });
-    </script>
+    function startMusic() {
+        if (!musicStarted) {
+            bgMusic.play()
+                .then(() => {
+                    musicStarted = true;
+                    console.log("Music started!");
+                    removeListeners();
+                })
+                .catch(err => console.log("Play blocked:", err));
+        }
+    }
+
+    function removeListeners() {
+        window.removeEventListener("scroll", startMusic);
+        window.removeEventListener("click", startMusic);
+        window.removeEventListener("touchstart", startMusic);
+    }
+
+    // Start on FIRST interaction
+    window.addEventListener("scroll", startMusic, { once: true });
+    window.addEventListener("click", startMusic, { once: true });
+    window.addEventListener("touchstart", startMusic, { once: true });
+</script>
+
    <div class="petal-container" id="petalContainer"></div>
     <!-- Introduction Section -->
     <section class="introduction">
