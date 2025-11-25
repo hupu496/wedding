@@ -581,6 +581,90 @@
     50% { transform: scale(1.08); }
     100% { transform: scale(1); }
 }
+.invitation-card {
+    background: #fff;
+    border: 2px solid #000;
+    padding: 40px 20px;
+    margin: 40px auto;
+    border-radius: 10px;
+    font-family: 'Noto Serif Devanagari', serif;
+}
+
+.invitation-heading {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.invitation-sub {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.invitation-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.invitation-block {
+    width: 40%;
+    text-align: left;
+}
+
+.name-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.invitation-mid img {
+    width: 80px;
+}
+
+.event-title {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 30px;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    display: inline-block;
+    padding: 6px 20px;
+}
+
+.event-desc {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.poetry-box {
+    border: 2px solid #000;
+    padding: 20px;
+    margin: 30px auto;
+    width: 80%;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.invite-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.family-block {
+    width: 45%;
+    text-align: left;
+}
+
+.family-block h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
 
     </style>
 </head>
@@ -653,15 +737,74 @@
 
    <div class="petal-container" id="petalContainer"></div>
     <!-- Introduction Section -->
-    <section class="introduction">
-        <div class="container">
-            <h2 class="section-title">Our Special Day</h2>
-            <p class="invitation-text">
-                With immense joy and gratitude, we invite you to witness and bless our union as we embark on this beautiful journey of togetherness. Your presence will make our celebrations complete.
-            </p>
-            <img src="image/home.png" alt="Bride and Groom" class="bride-groom-img">
+<section class="invitation-card">
+    <div class="container">
+
+        <h2 class="invitation-heading">मान्यवर,</h2>
+        <p class="invitation-sub">परमपिता परमात्मा की असीम कृपा से</p>
+
+        <div class="invitation-row">
+
+            <!-- Groom Side -->
+            <div class="invitation-block">
+                <h3 class="name-title">हृदयांश आदर्श</h3>
+                <p><strong>सुपुत्र :</strong> श्रीमती भारती श्रीवास्तव एवं श्री अशोक कुमार श्रीवास्तव</p>
+                <p><strong>सुपौत्र :</strong> स्मृतिशेष अवध बिहारी प्रसाद</p>
+                <p>आर.एन.ए.आर. कॉलेज के पीछे, श्रीकृष्णपुरी (पश्चिमी)</p>
+                <p>समस्तीपुर</p>
+            </div>
+
+            <!-- Mid Icon -->
+            <div class="invitation-mid">
+                <img src="image/handshake.png" alt="joining hands">
+            </div>
+
+            <!-- Bride Side -->
+            <div class="invitation-block">
+                <h3 class="name-title">हृदयकन्या सोनाक्षी</h3>
+                <p><strong>सुपुत्री :</strong> श्रीमती सीमा सिंह एवं श्री विनय कुमार</p>
+                <p>ग्राम - भोरेहाँ, पोस्ट - पताही</p>
+                <p>जिला - सीतामढ़ी</p>
+            </div>
+
         </div>
-    </section>
+
+        <h3 class="event-title">के मांगलिक परिचयोत्सव</h3>
+        <p class="event-desc">
+            के शुभ अवसर पर आप पधार कर वर-वधू को आशीर्वाद प्रदान कर हमें अनुगृहित करें।
+        </p>
+
+        <!-- Poetic Box -->
+        <div class="poetry-box">
+            <p>
+                पलक पर चाँद उगरेलं, सितारे मुसुकुराइए,<br>
+                हमे खुशी तब होही जब आप<br>
+                हमारें घर की शोभा बढ़ाइये। <br>
+                <strong>सुरभि, श्वेतांक, कार्तिकेय</strong>
+            </p>
+        </div>
+
+        <div class="invite-row">
+
+            <!-- Groom Side Family -->
+            <div class="family-block">
+                <h4>दर्शानाभिलाषी :-</h4>
+                <p>अनिल कुमार प्रसाद</p>
+                <p>सुनील कुमार प्रसाद</p>
+                <p>रेषु, शुभम एवं समस्त परिवार</p>
+            </div>
+
+            <!-- Bride Side Family -->
+            <div class="family-block">
+                <h4>आकांक्षी :-</h4>
+                <p><strong>अशोक कुमार श्रीवास्तव</strong></p>
+                <p>मो.- 9430026562, 7352986122</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
     <!-- Events Section -->
     <section class="events">
