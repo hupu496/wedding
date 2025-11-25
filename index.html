@@ -553,6 +553,35 @@
             
            
         }
+        .upi-floating-btn {
+    position: fixed;
+    bottom: 20px; 
+    right: 20px;
+    width: 65px;
+    height: 65px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.upi-floating-btn img {
+    width: 60%;
+}
+.upi-floating-btn {
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
     </style>
 </head>
 <body>
@@ -768,7 +797,9 @@
             </div>
         </div>
     </section>
-
+<a href="upi://pay?pa=aadarsh629-1@okicici&pn=Aadarsh&cu=INR" class="upi-floating-btn">
+    <img src="image/phonepe-icon.png" alt="Pay with Google Pay">
+</a>
     <!-- Footer -->
 <footer>
     <div class="container">
@@ -777,7 +808,10 @@
 
         <p class="designed-by">
             Designed by 
-            <a href="https://saravashray.in/software" target="_blank">
+            <a href="https://saravashray.in/software" style="
+    text-decoration: none;
+    color: yellow;
+" target="_blank">
                 Sarvashray
             </a>
         </p>
