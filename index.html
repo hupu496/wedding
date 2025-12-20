@@ -15,8 +15,19 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html {
-  scroll-behavior: smooth;
+       html, body {
+   width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Fix sections */
+section, .section {
+    height: auto !important;
+    min-height: auto;
+    overflow: visible;
 }
 
         :root {
@@ -27,12 +38,14 @@
             --light-gold: #F4E4A6;
         }
 
-        body {
+        /* body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--cream);
             color: #333;
             overflow-x: hidden;
-        }
+            -webkit-overflow-scrolling: touch;
+
+        } */
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
@@ -58,6 +71,7 @@
         .header-content {
             position: relative;
             z-index: 2;
+            overflow: hidden;
         }
 
         .couple-names {
@@ -67,11 +81,13 @@
         }
           .couple-names {
       font-family: "Playwrite DE SAS", cursive;
-      font-size: 80px;
+      font-size: 60px;
       color: #FFD700;
       text-shadow: 2px 2px 8px #f3e507;
       letter-spacing: 2px;
       transition: all 0.3s ease;
+    font-weight: bold;
+    text-align: center;
     }
 
     .couple-names:hover {
@@ -621,9 +637,32 @@
     margin-bottom: 10px;
 }
 
-.invitation-mid img {
-    width: 80px;
+/* Joining Hand – BOX */
+.invitation-mid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
 }
+
+/* Image – desktop */
+.invitation-mid img {
+    width: 320px;        /* Normal size */
+    height: auto;
+    max-width: 100%;
+}
+
+/* 📱 MOBILE – BIG BUT SAFE */
+@media (max-width: 768px) {
+    .invitation-mid img {
+        width: 150%;          /* Fill the box */
+        max-width: 380px;     /* Control max size */
+    }
+}
+
+
 
 .event-title {
     text-align: center;
@@ -665,7 +704,28 @@
     font-size: 20px;
     margin-bottom: 10px;
 }
-
+.and-symbol {
+    margin: 0 8px;
+    font-size: 28px;
+    font-weight: normal;
+    color: #d1c44c; /* beautiful pink/maroon tone */
+}
+.header-video {
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10px;
+    display: block;
+    margin: 10px auto;
+    object-fit: cover;
+}
+/* Mobile fix */
+@media (max-width: 768px) {
+    .header-video {
+        min-height: 60vh;
+        width: 100%;
+        object-fit: cover;
+    }
+}
     </style>
 </head>
 <body>
@@ -685,7 +745,12 @@
         </div>
         
         <div class="header-content container">
-          <h1 class="couple-names">Aadarsh <span class="and-symbol">&</span> Sonakshi</h1>
+          <h1 class="couple-names">Aadarsh <span class="and-symbol">weds</span> Sonakshi</h1>
+                     <!-- MP4 video replacing the image -->
+    <video autoplay muted loop playsinline class="header-video">
+        <source src="image/Video2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
           <img src="image/front.png" alt="">
             <p class="wedding-date">6 Feburary 2026</p>
             <p>Together with our families, we invite you to celebrate our wedding</p>
@@ -756,7 +821,7 @@
 
             <!-- Mid Icon -->
             <div class="invitation-mid">
-                <img src="image/handshake.png" alt="joining hands">
+                <img src="image/Joining_hand-removebg-preview.png" alt="joining hands">
             </div>
 
             <!-- Bride Side -->
@@ -780,7 +845,7 @@
                 पलक पर चाँद उगरेलं, सितारे मुसुकुराइए,<br>
                 हमे खुशी तब होही जब आप<br>
                 हमारें घर की शोभा बढ़ाइये। <br>
-                <strong>सुरभि, श्वेतांक, कार्तिकेय</strong>
+                <strong>सुरभि, सात्विक, कार्तिकेय</strong>
             </p>
         </div>
 
@@ -940,8 +1005,9 @@
             </div>
         </div>
     </section>
-<a href="upi://pay?pa=aadarsh629-1@okicici&pn=Aadarsh&cu=INR" class="upi-floating-btn">
-    <img src="image/phonepe-icon.png" alt="Pay with Google Pay">
+<a href="upi://pay?pa=aadarsh629-1@okicici&pn=Aadarsh&am=500&cu=INR&tn=Payment&tr=TXN500001"
+   class="upi-floating-btn">
+    <img src="image/phonepe-icon.png" alt="Pay via UPI">
 </a>
     <!-- Footer -->
 <footer>
@@ -1130,21 +1196,13 @@
                 }
             });
         });
-        class SmoothScroll {
+       class SmoothScroll {
     constructor() {
-        this.isScrolling = false;
-        this.scrollEndTimer = null;
         this.init();
     }
 
     init() {
-        // Add CSS for smooth scrolling
         this.addSmoothScrollCSS();
-        
-        // Add touch event listeners for mobile
-        this.addTouchEvents();
-        
-        // Handle anchor link clicks
         this.handleAnchorLinks();
     }
 
@@ -1154,6 +1212,11 @@
             html {
                 scroll-behavior: smooth;
             }
+
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+
             @media (prefers-reduced-motion: reduce) {
                 html {
                     scroll-behavior: auto;
@@ -1163,110 +1226,24 @@
         document.head.appendChild(style);
     }
 
-    addTouchEvents() {
-        let startY;
-        let startTime;
-
-        document.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            startTime = Date.now();
-        }, { passive: true });
-
-        document.addEventListener('touchmove', (e) => {
-            if (this.isScrolling) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        document.addEventListener('touchend', (e) => {
-            const endY = e.changedTouches[0].clientY;
-            const endTime = Date.now();
-            const distance = Math.abs(endY - startY);
-            const duration = endTime - startTime;
-
-            // Detect fast swipe
-            if (distance > 50 && duration < 300) {
-                this.handleMomentumScroll();
-            }
-        }, { passive: true });
-    }
-
-    handleMomentumScroll() {
-        // Add momentum-based smooth scrolling
-        const currentScroll = window.pageYOffset;
-        const viewportHeight = window.innerHeight;
-        
-        window.scrollTo({
-            top: currentScroll + (Math.random() > 0.5 ? viewportHeight : -viewportHeight),
-            behavior: 'smooth'
-        });
-    }
-
     handleAnchorLinks() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (!target) return;
+
                 e.preventDefault();
-                const target = anchor.getAttribute('href');
-                this.scrollToTarget(target);
+
+                window.scrollTo({
+                    top: target.offsetTop,
+                    behavior: 'smooth'
+                });
             });
-        });
-    }
-
-    scrollToTarget(target, duration = 800) {
-        const targetElement = document.querySelector(target);
-        if (!targetElement) return;
-
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-
-        // For mobile, use smaller duration for shorter distances
-        const adjustedDuration = Math.min(duration, Math.abs(distance) * 0.5);
-
-        this.isScrolling = true;
-
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-
-        // Clear previous timer
-        if (this.scrollEndTimer) clearTimeout(this.scrollEndTimer);
-
-        // Set scrolling state to false after scroll completes
-        this.scrollEndTimer = setTimeout(() => {
-            this.isScrolling = false;
-        }, adjustedDuration + 100);
-    }
-
-    // Programmatic scroll to element
-    scrollToElement(element, offset = 0) {
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-            top: elementPosition - offset,
-            behavior: 'smooth'
-        });
-    }
-
-    // Scroll to top
-    scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    // Scroll to bottom
-    scrollToBottom() {
-        window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth'
         });
     }
 }
 
-// Initialize smooth scroll
-const smoothScroll = new SmoothScroll();
+new SmoothScroll();
     </script>
 </body>
 </html>
